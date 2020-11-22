@@ -7,6 +7,9 @@ import java.rmi.server.ExportException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * unreachable Recycler$DefaultHandle
+ */
 public class RecycleNoRelease1 {
     private static final Recycler<User> RECYCLER = new Recycler<User>() {
         //没有对象的时候，新建一个对象， 会传入一个handler，在Recycler池里，所有的对象都会转成DefaultHandle对象
@@ -42,6 +45,7 @@ public class RecycleNoRelease1 {
 
     public static void main(String[] args) throws InterruptedException {
         try {
+            //此处添加延时是为了让我来得及打开JVisualVM去查看动态变化并使用jmap生成dump文件
             Thread.sleep(20000);
         } catch (Exception e) {
             e.printStackTrace();
