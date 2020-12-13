@@ -67,13 +67,14 @@ public class CycliMutiThread3 {
         }
     }
     public static void  main(String[] args) throws InterruptedException {
-        Object test = new CycliMutiThread3().test2();
+        Object test = new CycliMutiThread3().test2();//9、test2方法中的局部变量已经无效
         System.out.println("over");//断点2
         Thread.sleep(20000);
     }
 
     private Object test2() throws InterruptedException {
         Object test = test();
+        //8、删除不可达对象。由于WeakOrderQueue对象正在被局部变量引用，所以不会被回收
         System.gc();
         return null;
     }
@@ -104,7 +105,7 @@ public class CycliMutiThread3 {
             System.out.println("thread1 end");
             InternalThreadLocalMap internalThreadLocalMap = InternalThreadLocalMap.get();
             List<Object> list = new ArrayList<>();
-            for (int i = 0; i < 32; ++i) {
+            for (int i = 0; i < 32; ++i) {//6、找到所需对象 WeakOrderQueue
                 Object object = internalThreadLocalMap.indexedVariable(i);
                 if (object instanceof WeakHashMap) {
                     WeakHashMap weakHashMap = (WeakHashMap)object;
@@ -114,12 +115,12 @@ public class CycliMutiThread3 {
                     }
                 }
             }
+            //7、返回所需对象 WeakOrderQueue
             ooo[0] = list.get(0);
         });
         thread1.start();
         thread1.join();
 
-        //6、上面两个线程运行完毕，触发gc
         return ooo[0];
     }
 }
