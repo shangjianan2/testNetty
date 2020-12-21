@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- * thread用于创建对象，thread2用于回收对象。用于引发WeakOrderQueue$Link的unreachable
+ * -XX:MaxTenuringThreshold=0 -Xms256m -Xmx256m -Xmn512k
  */
 public class RecycleMultiThread3 {
     private static final Recycler<User> RECYCLER = new Recycler<User>() {
