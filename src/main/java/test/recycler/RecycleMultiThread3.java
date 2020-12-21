@@ -34,6 +34,14 @@ public class RecycleMultiThread3 {
 
     public static void main(String[] args) throws Exception {
         new RecycleMultiThread3().test();
+        new RecycleMultiThread3().test();
+        new RecycleMultiThread3().test();
+        new RecycleMultiThread3().test();
+
+        new RecycleMultiThread3().test();
+        new RecycleMultiThread3().test();
+        new RecycleMultiThread3().test();
+        new RecycleMultiThread3().test();
         System.out.println("main over");
         while (true) {
             Thread.sleep(1000);
